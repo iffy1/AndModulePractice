@@ -1,25 +1,28 @@
 package com.finddreams.module_home;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.view.View;
+
 import android.widget.FrameLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.finddreams.module_base.base.BaseActivity;
 import com.finddreams.module_base.utils.RouteUtils;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
+
 
 /**
  * Created by lx on 17-10-24.
  */
-
+@Route(path = RouteUtils.Activity_Home)
 public class HomeActivity extends BaseActivity {
     //    @BindView(R2.id.ll_main)
     FrameLayout llMain;
@@ -79,6 +82,8 @@ public class HomeActivity extends BaseActivity {
                 mHomeFragment = RouteUtils.getHomeFragment();
                 if (mHomeFragment != null) {
                     ft.add(R.id.ll_main, mHomeFragment, TAG_FRAGMENT_HOME);
+                }else{
+                    Toast.makeText(this,"模块“Home”未安装",Toast.LENGTH_LONG).show();
                 }
             }
             curFragment = mHomeFragment;
@@ -88,6 +93,8 @@ public class HomeActivity extends BaseActivity {
                 findFragment = RouteUtils.getFindFragment();
                 if (findFragment != null) {
                     ft.add(R.id.ll_main, findFragment, TAG_FRAGMENT_FIND);
+                }else{
+                    Toast.makeText(this,"模块“发现”未安装",Toast.LENGTH_LONG).show();
                 }
             }
             curFragment = findFragment;
@@ -97,6 +104,8 @@ public class HomeActivity extends BaseActivity {
                 shoppingcartFragment = RouteUtils.getShoppingCartFragment();
                 if (shoppingcartFragment != null) {
                     ft.add(R.id.ll_main, shoppingcartFragment, TAG_FRAGMENT_CART);
+                }else{
+                    Toast.makeText(this,"模块“购物车”未安装",Toast.LENGTH_LONG).show();
                 }
             }
             curFragment = shoppingcartFragment;
@@ -106,6 +115,8 @@ public class HomeActivity extends BaseActivity {
                 userFragment = RouteUtils.getUserFragment();
                 if (userFragment != null) {
                     ft.add(R.id.ll_main, userFragment, TAG_FRAGMENT_USER);
+                }else{
+                    Toast.makeText(this,"模块“用户”未安装",Toast.LENGTH_LONG).show();
                 }
             }
             curFragment = userFragment;

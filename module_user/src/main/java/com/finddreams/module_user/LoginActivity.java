@@ -37,16 +37,12 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
 
     @Override
     public void onClick(View view) {
-//        switch (view.getId()){
-//            case R.id.bt_login_success:
-//                break;
-//            case R.id.bt_login_fail:
-//                break;
-//        }
         int id = view.getId();
         if (id == R.id.bt_login_success) {
+            System.out.println("发送登录成功的消息");
             EventBus.getDefault().post(new LoginStateEvent(true));
         } else if (id == R.id.bt_login_fail) {
+            System.out.println("发送登录失败的消息");
             EventBus.getDefault().post(new LoginStateEvent(false));
         }
         finish();

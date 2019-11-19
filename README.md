@@ -1,6 +1,9 @@
 # AndModulePractice
 具体教程请看：
 
+出现 ARouter::ARouter init logistics center exception! 请手动卸载已经安装的app再试
+App改模块不生效的话也可以尝试卸载后重装
+
 > 
 &emsp;&emsp;[《我所理解的Android模块化（一）——模块化概念和路由》](http://blog.csdn.net/finddreams/article/details/78339809)
 &emsp;&emsp;[《我所理解的Android模块化（二）——模块通信和模块间服务调用》](http://blog.csdn.net/finddreams/article/details/78349267)

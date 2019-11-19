@@ -1,18 +1,17 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.finddreams.module_user">
+    package="com.finddreams.module_gooddetail">
 
     <application>
         <activity
-            android:name=".UserActivityASApp"
+            android:name=".GoodDetailActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".LoginActivity" android:theme="@style/AppTheme"/>
+
     </application>
 
 </manifest>

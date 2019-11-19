@@ -1,19 +1,20 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion rootProject.ext.defaultConfig.compileSdkVersion
+    buildToolsVersion rootProject.ext.defaultConfig.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion rootProject.ext.defaultConfig.minSdkVersion
+        targetSdkVersion rootProject.ext.defaultConfig.targetSdkVersion
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        //Arouter
         javaCompileOptions {
             annotationProcessorOptions {
-                arguments = [moduleName: project.getName()]
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
     }
@@ -29,15 +30,21 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    compile "com.alibaba:arouter-api:$rootProject.arouterVersion"
-    implementation 'com.android.support:appcompat-v7:26.1.0'
+
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+    androidTestImplementation rootProject.ext.dependencies.testrunner
+    androidTestImplementation rootProject.ext.dependencies.espresso
     implementation project(':lib_pay')
     implementation project(':lib_share')
-    compile 'org.greenrobot:eventbus:3.0.0'
-    compile 'com.jakewharton:butterknife:8.8.1'
+
+    //Arouter在编译期间生成路径映射
+    api rootProject.ext.dependencies.aliArouter
+    annotationProcessor rootProject.ext.dependencies.aliprocess
+
+
+
+    implementation rootProject.ext.dependencies.appcompat
+    implementation rootProject.ext.dependencies.eventbus
 
 
 }

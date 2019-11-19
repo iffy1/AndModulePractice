@@ -1,15 +1,25 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.ext.defaultConfig.compileSdkVersion
+    buildToolsVersion rootProject.ext.defaultConfig.buildToolsVersion
     defaultConfig {
         applicationId "com.finddreams.modulepractice"
-        minSdkVersion 19
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.defaultConfig.minSdkVersion
+        targetSdkVersion rootProject.ext.defaultConfig.targetSdkVersion
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 
     signingConfigs {
@@ -36,19 +46,37 @@ android {
 
 }
 
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation rootProject.ext.dependencies.clayout
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.1'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile project(':module_home')
-    compile project(':module_find')
-    if (isNeedUserModule.toBoolean()) {
-        compile project(':module_user')
+    androidTestImplementation rootProject.ext.dependencies.testrunner
+    androidTestImplementation rootProject.ext.dependencies.espresso
+
+    //Arouter在编译期间生成路径映射
+    api rootProject.ext.dependencies.aliArouter
+    annotationProcessor rootProject.ext.dependencies.aliprocess
+
+    if (!rootProject.ext.isBuildShoppingcartApp) {
+        implementation project(':module_shoppingcart')
     }
-    compile project(':module_gooddetail')
-    compile project(':module_shoppingcart')
+    if (!rootProject.ext.isBuildgooddetailApp) {
+        implementation project(':module_gooddetail')
+    }
+    if (!rootProject.ext.isBuildFindApp) {
+        implementation project(':module_find')
+    }
+    if (!rootProject.ext.isBuildHomeApp) {
+        implementation project(':module_home')
+    }
+    if (!rootProject.ext.isBuilduserApp) {
+        implementation project(':module_user')
+    }
+
+
+    //公共模块
+    implementation project(':module_base')
+    implementation rootProject.ext.dependencies.appcompat
 
 }

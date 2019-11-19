@@ -1,12 +1,13 @@
 package com.finddreams.shoppingcart;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.finddreams.module_base.base.BaseFragment;
@@ -17,9 +18,6 @@ import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 import org.greenrobot.eventbus.ThreadMode;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
 /**
  * Created by lx on 17-10-24.
@@ -55,8 +53,11 @@ public class ShoppingCartMainFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoginSuccess(LoginStateEvent event) {
+        System.out.println("购物车收到登陆状态改变的消息");
         if (event.isSuccess) {
             tv_loginstate.setText("已登录");
+        }else{
+            tv_loginstate.setText("未登录");
         }
     }
 }

@@ -1,12 +1,13 @@
 package com.finddreams.module_user;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.annotation.Nullable;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.finddreams.module_base.base.BaseFragment;
@@ -48,8 +49,11 @@ public class UserMainFragment extends BaseFragment {
 
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void onLoginSuccess(LoginStateEvent event) {
+        System.out.println("用户界面收到登陆状态改变的消息");
         if (event.isSuccess) {
             tv_login_state.setText("已登录");
+        }else{
+            tv_login_state.setText("未登录");
         }
     }
 

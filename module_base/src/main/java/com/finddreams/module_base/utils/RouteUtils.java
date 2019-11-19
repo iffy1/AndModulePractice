@@ -1,7 +1,10 @@
 package com.finddreams.module_base.utils;
 
-import android.support.v4.app.Fragment;
+import android.content.Context;
 
+import androidx.fragment.app.Fragment;
+
+import com.alibaba.android.arouter.facade.callback.NavigationCallback;
 import com.alibaba.android.arouter.launcher.ARouter;
 
 /**
@@ -15,6 +18,7 @@ public class RouteUtils {
     public static final String Find_Fragment_Main = "/find/main";
     public static final String User_Fragment_Main = "/user/main";
     public static final String User_Activity_Login = "/user/login";
+    public static final String Activity_Home = "/activity/home";
     public static final String ShoppingCart_Fragment_Main = "/shoppingcart/main";
 
     public static final String Service_User = "/user/service";
@@ -23,14 +27,17 @@ public class RouteUtils {
         Fragment fragment = (Fragment) ARouter.getInstance().build(Find_Fragment_Main).navigation();
         return fragment;
     }
+
     public static Fragment getUserFragment() {
         Fragment fragment = (Fragment) ARouter.getInstance().build(User_Fragment_Main).navigation();
         return fragment;
     }
+
     public static Fragment getHomeFragment() {
         Fragment fragment = (Fragment) ARouter.getInstance().build(Home_Fragment_Main).navigation();
         return fragment;
     }
+
     public static Fragment getShoppingCartFragment() {
         Fragment fragment = (Fragment) ARouter.getInstance().build(ShoppingCart_Fragment_Main).navigation();
         return fragment;
@@ -38,12 +45,18 @@ public class RouteUtils {
 
     /**
      * 跳转到商品详情的页面
+     *
      * @param goodName
      */
     public static void startGoodDetailActivity(String goodName) {
-        ARouter.getInstance().build(GoodDetail_Activity_Main).withString("goodName",goodName).navigation();
+        ARouter.getInstance().build(GoodDetail_Activity_Main).withString("goodName", goodName).navigation();
     }
+
     public static void startLoginActivity() {
         ARouter.getInstance().build(User_Activity_Login).navigation();
+    }
+
+    public static void startHomeActivity(Context c, NavigationCallback cb) {
+        ARouter.getInstance().build(Activity_Home).navigation(c, cb);
     }
 }
